@@ -51,9 +51,9 @@ public class ArrayProblems {
      * @return <tt>true</tt> if listB is a permutation of listA, <tt>false</tt> otherwise
      */
     public static boolean isPermutation(int[] listA, int[] listB) {
-        assert (listA != null && listB != null) : "Violation of precondition: isPermutation";
+        assert (listA != null && listB != null && listA.length==listB.length) : "Violation of precondition: isPermutation";
+        Arrays.
 
-		/*STUDENTS: INSERT YOUR CODE HERE*/
 
         return true; //must change
     }
