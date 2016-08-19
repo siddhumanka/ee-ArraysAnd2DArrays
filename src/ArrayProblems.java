@@ -127,16 +127,8 @@ public class ArrayProblems {
     public static String maxSum(int[][] mat) {
         assert (mat != null) && (mat.length > 0) && (mat[0].length > 0)
                 && isRectangular(mat) : "Violation of precondition: maxSum";
-
-        String row = "R";
-        String col = "C";
-        String ans1;
-        String ans2;
-        String index1;
-        String index2;
-        int ind = 0;
-        int max1 = -999;
-        int max2 = -999;
+        String row = "R", col = "C", ans1, ans2, index1, index2;
+        int ind = 0, max1 = Integer.MIN_VALUE, max2 = Integer.MIN_VALUE;
         for (int i = 0; i < mat.length; i++)
         {
             int x = 0;
@@ -150,10 +142,7 @@ public class ArrayProblems {
                 ind = i;
             }
         }
-        //int max1 = max;
-        //max=0;
         index1 = Integer.toString(ind);
-
         for (int i = 0; i < (mat[i].length) - 1; i++)
         {
             int x = 0;
