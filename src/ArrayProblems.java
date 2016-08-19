@@ -6,6 +6,8 @@
  */
 
 
+import java.util.Arrays;
+
 /**
  * ArrayProblems.java
  * <p>
@@ -52,10 +54,14 @@ public class ArrayProblems {
      */
     public static boolean isPermutation(int[] listA, int[] listB) {
         assert (listA != null && listB != null && listA.length==listB.length) : "Violation of precondition: isPermutation";
-        Arrays.
-
-
-        return true; //must change
+        int [] newListA = Arrays.copyOf(listA,listA.length);
+        int [] newListB = Arrays.copyOf(listB,listB.length);
+        Arrays.sort(newListA);
+        Arrays.sort(newListB);
+        if(Arrays.equals(newListA,newListB)) {
+            return true; //must change
+        }
+        return false;
     }
 
 
@@ -83,10 +89,21 @@ public class ArrayProblems {
      */
     public static int[] minDifference(int[] nums) {
         int[] result = new int[2];
-
-	    /*STUDENTS: INSERT YOUR CODE HERE*/
-
-        return result; //must change
+        int lowestFirstIndex=Integer.MAX_VALUE, distance = Integer.MAX_VALUE, lowestSecondIndex = Integer.MAX_VALUE;
+        for (int i = 0; i <nums.length ; i++) {
+            for (int j = i+1; j <nums.length ; j++) {
+                if(Math.abs(nums[i]-nums[j])<distance){
+                    distance=Math.abs(nums[i]-nums[j]);
+                    /*if(i<=lowestFirstIndex)*/lowestFirstIndex=i;
+                    /*if(j<lowestSecondIndex)*/lowestSecondIndex=j;
+                }
+            }
+        }
+        result[0]=lowestFirstIndex;
+        result[1]=lowestSecondIndex;
+       /* System.out.println("List : " + distance);
+        System.out.println("List : " + Arrays.toString(result));*/
+       return result;
     }
 
 
@@ -110,8 +127,19 @@ public class ArrayProblems {
     public static String maxSum(int[][] mat) {
         assert (mat != null) && (mat.length > 0) && (mat[0].length > 0)
                 && isRectangular(mat) : "Violation of precondition: maxSum";
+        int sum = 0, colSum=0, rowSum=0, j=0, k=0;
+        for (int i = 0; i <mat.length ; i++) {
+            j=0;k=0;
+            while(k<mat.length){
+                rowSum = rowSum +  mat[k][i];
+            }
+            while(j<mat[i].length) {
+                colSum = colSum + mat[i][j];
+                j++;
+            }
 
-        /*STUDENTS: INSERT YOUR CODE HERE*/
+        }
+
 
         return "R0"; //must change
     }
