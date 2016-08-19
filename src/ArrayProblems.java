@@ -19,7 +19,7 @@ import java.util.Arrays;
  * 3. native arrays, including the <tt>arr.length</tt> field and creating and using new native arrays
  */
 public class ArrayProblems {
-
+    //private static int sum=0;
     /**
      * Determine the Hamming distance between two arrays of ints.
      * Neither the parameter <tt>aList</tt> or
@@ -127,21 +127,55 @@ public class ArrayProblems {
     public static String maxSum(int[][] mat) {
         assert (mat != null) && (mat.length > 0) && (mat[0].length > 0)
                 && isRectangular(mat) : "Violation of precondition: maxSum";
-        int sum = 0, colSum=0, rowSum=0, j=0, k=0;
-        for (int i = 0; i <mat.length ; i++) {
-            j=0;k=0;
-            while(k<mat.length){
-                rowSum = rowSum +  mat[k][i];
-            }
-            while(j<mat[i].length) {
-                colSum = colSum + mat[i][j];
-                j++;
-            }
 
+        String row = "R";
+        String col = "C";
+        String ans1;
+        String ans2;
+        String index1;
+        String index2;
+        int ind = 0;
+        int max1 = -999;
+        int max2 = -999;
+        for (int i = 0; i < mat.length; i++)
+        {
+            int x = 0;
+            for (int j = 0; j < mat[i].length; j++)
+            {
+                x = x + mat[i][j];
+            }
+            if (x > max1)
+            {
+                max1 = x;
+                ind = i;
+            }
         }
+        //int max1 = max;
+        //max=0;
+        index1 = Integer.toString(ind);
 
+        for (int i = 0; i < (mat[i].length) - 1; i++)
+        {
+            int x = 0;
+            for (int j = 0; j < mat.length; j++)
+            {
+                x = x + mat[j][i];
+            }
+            if (x > max2)
+            {
+                max2 = x;
+                ind = i;
+            }
+        }
+        index2 = Integer.toString(ind);
+        if (max1 >= max2) {
+            ans1 = row + index1;
+            return ans1;
+        } else {
 
-        return "R0"; //must change
+            ans2 = col + index2;
+            return ans2;
+        }
     }
 
     /**
@@ -161,12 +195,39 @@ public class ArrayProblems {
     public static int mostValuablePlot(int[][] city) {
         assert city != null && city.length > 0 && city[0].length > 0 &&
                 isRectangular(city) : "Failed precondition sizeOfLargestSubMatrix";
+        int sum=Integer.MIN_VALUE, tempSum=0,k;
+        for (int i = 0; i <city.length ; i++) {
 
-        /*STUDENTS: INSERT YOUR CODE HERE*/
+            for (int j = 0; j < city[i].length; j++) {
+                int l = i;
+                while (l < city.length) {
+                    k=j;
+                    while (k < city[i].length) {
+                        tempSum = addMatrix(city, i, j, l, k);
+                        if (sum < tempSum) {
+                            sum = tempSum;
+                        }
+                        k++;
+                    }
+                    l++;
+                }
+            }
 
-        return -1; //must change
+        }
+        return sum; //must change
+        }
+
+    public static int addMatrix(int[][] city, int i, int j, int maxX, int maxY){
+        int tempSum=0;
+        while( i <= maxX ) {
+            while( j <= maxY) {
+                tempSum += city[i][j];
+                j++;
+            }
+            i++;
+        }
+        return tempSum;
     }
-
 
     /**
      * Determine if the chess board represented by board is a safe set up.
