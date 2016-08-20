@@ -228,15 +228,51 @@ public class ArrayProblems {
      * @param board the chessboard
      * @return true if the configuration of board is safe, that is no queen can attack any other queen on the board. false otherwise.
      */
+
     public static boolean queensAreSafe(char[][] board) {
         char[] validChars = {'q', '.'};
-        assert (board != null) && (board.length > 0)
-                && isSquare(board) && onlyContains(board, validChars)
-                : "Violation of precondition: queensAreSafe";
+  assert (board != null) && (board.length > 0) && isSquare(board) && onlyContains(board, validChars) : "Violation of precondition: queensAreSafe";
+        int attack = 0, queen, i = 0, j = 0;
+        for (i = 0; i < board.length; i++) {
+            queen = 0;
+            for (j = 0; j < board[i].length; j++) {
+                if (board[i][j] == 'q') {
+                    queen = 1;
+                    break;
+                }
+            }
 
-		/*STUDENTS: INSERT YOUR CODE HERE*/
+            if (queen != 0) {
+                for (int k = j + 1; k < board.length; k++) {
+                    if (board[i][k] == 'q')
+                        attack = 1;
+                    if (attack==1)
+                        return false;
+                }
+                for (int row = i + 1, col = j - 1; row < board.length && col >= 0; row++, col--) {
+                    if (board[row][col] == 'q')
+                        attack = 1;
+                    if (attack==1)
+                        return false;
 
-        return false; //must change
+                }
+                for (int row = i + 1; row < board.length; row++) {
+                    if (board[row][j] == 'q')
+                        attack = 1;
+                    if (attack==1)
+                        return false;
+                }
+                for (int row = i + 1, col = j + 1; row < board.length && col < board.length; row++, col++) {
+                    if (board[row][col] == 'q')
+                        attack = 1;
+                    if (attack==1)
+                        return false;
+                }
+
+            }
+
+        }
+        return true;
     }
 
     public static void main(String[] args) {
